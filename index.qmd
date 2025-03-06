@@ -1,0 +1,345 @@
+---
+title: "Statistical methods in public policy research"
+subtitle: "Chapter for the *Oxford Research Encyclopedia on Public Policy*"
+date: 2025-03-05
+author:
+- name: Andrew Heiss
+  affiliations: 
+    - id: gsu
+      name: Georgia State University
+      department: Andrew Young School of Policy Studies, Department of Public Management and Policy
+      address: "55 Park Place NE, #464"
+      city: Atlanta
+      region: GA
+      country: USA
+      postal-code: 30303
+  orcid: 0000-0002-3948-3914
+  url: https://www.andrewheiss.com
+  email: aheiss@gsu.edu
+
+bibliography: bib/references.json
+csl: bib/apa.csl
+
+params:
+  wordcount: |
+    <strong>{{< words-sum body-ref >}} total words</strong>: {{< words-body >}} in the body • {{< words-ref >}} in the references
+---
+
+::: {.content-visible when-meta="wordcount-banner"}
+{{< include _extensions/andrewheiss/wordcount/banner.html >}}
+:::
+
+```{r}
+#| label: setup
+#| include: false
+
+if (is.null(knitr::pandoc_to())) {
+  fmt_out <- "interactive"
+} else {
+  fmt_out <- knitr::pandoc_to()
+}
+
+knitr::opts_chunk$set(
+  echo = FALSE, include = FALSE, warning = FALSE, message = FALSE,
+  fig.width = 6, fig.height = (6 * 0.618), fig.retina = 3,
+  out.width = "100%", fig.align = "center"
+)
+```
+
+```{r}
+#| label: libraries-data
+library(tidyverse)
+library(tinytable)
+
+minipagify <- function(x) {
+  paste0(
+    "\\minipage{\\textwidth}", 
+    trimws(markdown::mark_latex(text = x, template = FALSE)), 
+    "\\endminipage"
+  )
+}
+
+tt_linebreak <- function(text) {
+  if (fmt_out == "latex") {
+    map_chr(text, \(x) {
+      if (is.na(x)) {
+        return(x)
+      }
+
+      x |>
+        str_replace_all("BBBB", "\n") |>
+        str_replace_all("PPPP", "\n\n")
+    })
+  } else {
+    map_chr(text, \(x) {
+      if (is.na(x)) {
+        return(x)
+      }
+      x |> 
+        str_replace_all("BBBB", "\n") |> 
+        str_replace_all("PPPP", "<br>")
+    })
+  }
+}
+
+if (fmt_out == "latex") {
+  theme_tabularray <- \(x) theme_tt(x, "tabular", style = "tabularray")
+  options(tinytable_tt_theme = theme_tabularray)
+}
+```
+
+::: {.content-visible when-format="html"}
+# Introduction {.hide}
+:::
+
+Statistics is a core part of public policy and administration
+
+> to analyze, synthesize, think critically, solve problems and make evidence-informed decisions in a complex and dynamic environment
+
+They should have the ability to identify, collect, analyze and use qualitative and quantitative data to inform decision making that best serves the wellbeing of the public; https://www.naspaa.org/sites/default/files/docs/2021-08/2019%20standard-5-text-ssi.pdf
+
+In recent years, though, there has been a small—but growing—backlash against quantitative policy research on multiple fronts. In 2017, the United States Supreme Court heard oral arguments for the case of Gill v. Whitford, which disputed partisan gerrymandering in legislative districts in Wisconsin. Arguing for the unfairness of the partisan maps, the lawyer for the appellees presented statistical evidence of legislative district unfairness using an Efficiency Gap (EG) criterion, which provides a statistical measure of the partisan competitiveness of individual districts [@Reinhard:2020]. In response to this argument, Chief Justice John Roberts dismissed the EG as a viable legal tool and expressed general skepticism of the value of social scientific and policy-related statistics as "sociological gobbledygook" [@gill-v-whitford, 40].
+
+Scope: focused primarily on the US
+
+
+Kraft Furlong 115: "Because public problems can be understood only through the insights of many disciplines, policy analysis draws from the ideas and methods of economics, political science, sociology, psychology, philosophy, and other scientific and technical fields."
+
+# Brief history of statistics in public policy
+
+Data has been used to inform government policies for centuries. Governments work to make their societies "legible" and understandable in order to better maintain control over their territories and respond to citizen demands. Technologies like cuneiform tablets documenting economic activity in ancient Sumer, Babylonian and Roman censuses, medieval English customs houses, European military records, and British cadastral maps all served as tools for governments to "see like a state" [@Scott:1998]. Data collection is built into the United States Constitution, which mandates a decennial census for congressional apportionment (Article I, Section 2).
+
+In the 1800s, publicly-available government data became more accessible to researchers, journalists, and policymakers, who began to use this data to lobby for legislative and social changes. For instance, in 1848, *New York Herald* editor Horace Greeley used data from the US Postal Service to show that congressional representatives were purposely overcharging travel reimbursements, leading to 1849 legislation prohibiting excess mileage charges [@Klein:2015]. Later in the century, scholars and activists used data to provide evidence of government-led discrimination against Black minorities throughout the United States. Ida B. Wells collected and analyzed newspaper reports and conducted extensive fieldwork to challenge the idea that Black lynching victims deserved the violence perpetrated against them due to poor morals, and instead provided evidence that lynchings were used to protect white social, economic, and political interests [@Francis:2014]. Throughout his career, W. E. B. Du Bois analyzed government-collected economic data to visualize the substantial racial wealth gap in post-slavery America, offering dozens of visualizations, reports, and academic papers that informed policy debates in the late 19th and early 20th centuries [@DuBoisBattle-BaptisteRusert:2018].
+
+Most of this public sector statistical work, however, was done on ad hoc basis. Some proposed policies were backed by quantitative evidence, but decisions were largely made through experience and craft knowledge [@FlemingRhodes:2018]. Near the end of the 20th century, @Wilson:1887 called for the scientific study of government management and administration, arguing that systematic analysis would improve government efficiency. Though not explicitly statistical in nature, Wilson's work laid the groundwork for more quantitative approaches to governance. For instance, in the early 1900s, Charles Merriam pushed for increased statistical analysis in political science research, leading to the creation of research centers focused on quantitative political and policy studies at the University of Chicago in the 1920s, and the institutionalization of quantitative social science more broadly [@Sylvan:1991]. Merriam encouraged statistical analysis at a federal level, consulting with several US presidents, and helping to found the Social Science Research Council, which remains a central hub in quantitative research today.
+
+Following the Great Depression and its accompanying New Deal policy interventions, and especially after World War II, the US federal bureaucracy expanded rapidly in scope and complexity. In response, scholars called for deeper and more systematic study of the policy process, with Harold Lasswell and Daniel Lerner advocating for the creation of an interdisciplinary field of "policy sciences" in the 1950s [@LernerLasswell:1951]. Lasswell's vision was for "a more muscular and integrated of Wilson's appeal for the scientific management of government" with research that merged Merriam-style quantitative methods with "insights from sociology, economics, business, [and] law," as well as methods from physics and biology [@Allison:2006, 63; @Lasswell:1951]. Beginning in the 1960s with the Kennedy administration, "the impulse to clarify policy options through quantification" [@Allison:2006, 64] rapidly snowballed as federal agencies borrowed and adapted statistical, game theoretical, and cost-benefit analytical approaches from the Department of Defense and the RAND Corporation. Philanthropic organizations like the Ford Foundation supported this transformation, providing millions of dollars in grants for graduate training in quantitative policy analysis throughout the 1970s [@Allison:2006]. 
+
+This push for systematic quantitative analysis at a federal level culminated in the establishment of the Congressional Budget Office (CBO) in 1974. Under the direction of Alice Rivlin, the CBO developed rigorous statistical methods for budget forecasting and policy impact analysis, establishing standards for non-partisan statistical analysis that have been used to estimate the costs and score the impact of all proposed federal legislation. Similar legislative and cabinet-level executive agencies were founded or reorganized following the creation of the CBO, including the Congressional Research Service, the Government Accountability Office, and a host of offices focused on "policy", "planning", "evaluation", and "administration," each with the goal of applying quantitative methods to systematically analyze the effects of proposed or existing public policies [@WeimerVining:2017, 35]. State and local governments followed suit, establishing their own policy analysis units and mandating budget forecasts and legislative scorecards. By the 1980s, policy analysis had emerged as a distinct profession.
+
+Prior to the push for the rationalization of policy research in the 1970s, most public policy research relied on qualitative methods [@BreunigAhlquist:2014]. Today, however, policy analysis in the United States is largely quantitative. The experience of the *Journal of Policy Analysis and Management* (JPAM)—the current flagship journal for policy analysis—is illustrative. Founded in 1981, JPAM initially published qualitative policy work, including case studies, comparative and historical analysis, descriptive work, and theory building—from 1981–1984, only 27% of JPAM's research articles used any sort of quantitative methods.^[Figures based on author's collected data.] This ratio reversed in 2000, when only a quarter of JPAM's articles were explicitly qualitative, and between 2001 and 2016, 90% of research published in JPAM was quantitative, including panel regression, experiments, econometric causal inference methods, simulations, and predictive modeling. JPAM's heavy statistical focus continues today. 
+
+Some of this turn towards quantitative work in academic publishing is a function of editorial preferences, but much of it reflects increased demand for quantitative policy analysis by policy designers and policymakers who must adhere to legal requirements for rigorous evaluations. Beginning in the late 1980s, econometricians partnered with policymakers to develop research designs to test the causal effect of policy interventions and produce measurable evidence of policy impact. Agencies and researchers partnered to run large-scale randomized control trials (RCTs), like a Department of Labor-funded job training program [@LaLonde:1986], a Department of Housing and Urban Development housing voucher program named Moving to Opportunity [@NBER:2025], and a state-funded experiment on elementary school classroom sizes named Tennessee STAR [@Mosteller:1995]. The results of these RCTs coincided with developments in non-experimental causal inference work [@CardKrueger:1994; @ImbensWooldridge:2009] and helped create the credibility revolution in economics and social science more broadly [@AngristPischke:2010], where policy evaluation is expected to have a plausible causal identification strategy to demonstrate evidence of social impact. By the early 2000s, new institutions emerged to encourage, fund,  support, and catalog the growing number of quantitative and causally-focused policy and program evaluation studies, including the Campbell Collaboration, which provides a central database and accompanying meta-analyses of a wide range of policy interventions; the Department of Education's What Works Clearinghouse, which houses evidence-based studies on education interventions; and the Jameel Poverty Action Lab (J-PAL), which funds, administers, and analyzes international development and poverty interventions around the world. 
+
+The growth of evidence-based quantitative policy analysis ultimately culminated in formal codification through the Foundations for Evidence-Based Policymaking Act of 2018, which mandated that federal agencies develop evidence-building plans and systematically evaluate their programs. This legislation represents the full institutionalization of statistical methods in policy analysis that began with ad hoc efforts in the 19th century, reflecting both the maturation of quantitative methodologies and the belief that "government decisions should be based on rigorous evidence and data about what works" [@EvidenceAct] and that systematic analysis can improve governance outcomes.
+
+In conjunction with the rise of data-driven business practices and analytics in the private sector [@FourcadeHealy:2024], the public sector turned toward digital governance in the 2010s. In 2011, Prime Minister David Cameron established the United Kingdom's Government Digital Service (GDS) unit, charged with "setting, leading and delivering the vision for a modern digital government" [@GovernmentDigitalService:2025]. Many other countries copied this approach by creating similar units and offices, including the United States Digital Service (USDS), established by President Barack Obama in 2014. These special units' missions focus primarily on modernizing outdated government systems and improving constituent experiences with government services—e.g. updating COBOL codebases first written in the 1960s, conducting user experience research on how applicants to benefits programs move through the system, and rapidly fixing the HealthCare.gov website that accompanied the Affordable Care Act [@Pahlka:2023]. 
+
+As a part of their missions to digitize public sector services, these units also encouraged more modern forms of data analysis and statistical work. In 2015, the President Obama appointed the first United States Chief Data Scientist in the Office of Science and Technology Policy, with the mission to "responsibly unleash the power of data to benefit all Americans" [@Honey:2016]. Under this mandate, USDS and OSTP encouraged data sharing across federal, state, and local agencies and supported modern and open analysis pipelines of this data, using both standard statistical techniques and more advanced machine learning approaches to help policymakers make data-driven decisions.
+
+Since the mid-2010s, advocacy groups, activists, think tanks, and public policy schools have embraced and encouraged this governmental turn toward open data practices. Much of this work has been aimed at ethics: @Tauberer:2014 outlines 14 principles for open government data, including accessibility practices, the use of open formats, commitment to public input, and the importance of citizen privacy, while the Urban Institute,^[https://www.urban.org/expertise/data-governance-and-privacy] the IAPP,^[https://iapp.org/] and other associations publish reports and guidelines for best data and analytics practices and lobby for digital governance policies. Policy schools have created undergraduate and graduate courses, certificates, and degree programs in policy analytics, where the techniques and methods from the field of data science are applied to issues specific to the public and nonprofit sectors. The Data Science for Public Service Consortium^[https://ds4ps.org/consortium/] comprises a community of dozens of public affairs programs with policy analytics curricula and provides a space for sharing teaching materials on key statistical and quantitative methods, including a set of modern data science competencies^[https://ds4ps.org/assets/data-science-competencies.pdf] like data visualization, causal inference, predictive modeling, data mining, spatial analytics, and other skills like report automation, programming, data cleaning, and project management.
+
+TODO: Something to conclude this section?
+
+```{r}
+#| label: jpam-stuff
+
+jpam <- read_csv("data/jpam-articles.csv")
+
+# Early years
+jpam |>
+  filter(
+    Year %in% 1981:1984,
+    !is.na(`Method category`)
+  ) |>
+  group_by(`Method category`) |>
+  summarize(n = n()) |>
+  mutate(total = sum(n), prop = n / total)
+
+# Later years
+jpam |>
+  filter(
+    Year %in% 2000:2016,
+    !is.na(`Method category`)
+  ) |>
+  group_by(`Method category`) |>
+  summarize(n = n()) |>
+  mutate(total = sum(n), prop = n / total)
+
+# Partial plot
+jpam |>
+  filter(
+    Year %in% 1981:1983 | (Year >= 1999 & Year <= 2016),
+    !is.na(`Method category`),
+    `Method category` != "Mixed methods"
+  ) |>
+  group_by(`Method category`, Year) |>
+  summarize(n = n()) |>
+  group_by(Year) |>
+  mutate(total = sum(n), prop = n / total) |>
+  ggplot(
+    aes(x = Year, y = prop, color = `Method category`)
+  ) +
+  geom_line()
+```
+
+# Public sector data
+
+- Public data: US Census, state and local government statistics - international data from the OECD and World Bank - IATI
+- Administrative data: records of program participants, etc.
+- Survey data: Census ACS, government citizen satisfaction surveys, etc.
+- Experimental data - JPAL, CEGA, What Works Clearinghouse, Campbell Collaboration
+- Big data and data traces like social media data, satellite imagery, sensor data (bikeshare stuff? congestion pricing/HOV toll lane stuff?)
+- OTHER?
+
+Types of data: @Pirog:2014
+
+
+# Core methodological approaches
+
+TODO: Merging of multiple disciplinary traditions: political science/public administration and economics/econometrics
+
+
+In quantitative statistical analysis, analysts are typically concerned with both (1) the characteristics or distribution of social phenomena on their own and (2) in the relationships between multiple phenomena. Different disciplines and analytical traditions use varying terms to define these variables—@tbl-methods-summary offers some disambiguation for these concepts.
+
+```{r}
+#| label: tbl-methods-summary
+#| tbl-cap: Summary of objectives of statistical analysis
+#| include: true
+
+read_tsv("data/methods-table.tsv") |>
+  rename(` ` = "...1") |>
+  mutate(across(
+    everything(),
+    \(x) tt_linebreak(x)
+  )) |>
+  tt(width = c(0.2, 0.8 / 3, 0.8 / 3, 0.8 / 3)) |>
+  (\(x)
+    if (fmt_out == "latex") {
+      x |>
+        format_tt(i = 2, j = 3, fn = minipagify) |>
+        format_tt(i = 2, j = 4, fn = minipagify) |>
+        format_tt(j = 1:2, markdown = TRUE) |>
+        format_tt(i = c(1, 3:6), j = 3:4, markdown = TRUE)
+    } else {
+      x |>
+        format_tt(j = 2:4, markdown = TRUE)
+    })() |>
+  style_tt(align = "l") |>
+  style_tt(j = 1, bold = TRUE) |>
+  style_tt(
+    bootstrap_class = "table table-sm",
+    tabularray_inner = "rowsep=2pt, cells={font=\\footnotesize}, row{1}={valign=b}"
+  )
+```
+
+
+Methodologists have converged on similar categorizations of quantitative research objectives. @BreunigAhlquist:2014 identify description, inference, and prediction as the primary goals of quantitative public policy research, while @Efron:2020 categorizes statistical work into prediction, estimation, and attribution. Synthesizing these frameworks, I propose three fundamental categories of quantitative public policy methods:
+
+1. **Description**, where the focus of the analysis is on exploring and understanding key variables, their distributions, and their relationships [@BreunigAhlquist:2014; @Tukey:1977; @Cleveland:1993; @Tufte:2001]
+2. **Explanation**, where the focus of the analysis is on explanatory variables ($X$) to either (1) accurately estimate their relationship with an outcome variable ($Y$), or (2) causally attribute the effect of specific explanatory variable on outcomes [@Shmueli:2010; @Breiman:2001; @Efron:2020; @MorganWinship:2014; @AngristPischke:2008; @PearlMackenzie:2020]
+3. **Prediction**, where the focus of the analysis is on the outcome variable ($Y$) and generating accurate forecasts, classifications, and predictions from new data [@BreunigAhlquist:2014; @Efron:2020]
+
+These categories provide a useful shorthand for describing different purposes of analysis, but these approaches are rarely mutually exclusive. Descriptive exploratory work is necessary for both explanatory and predictive analysis, and the division between causal and non-causal inference is rarely clear-cut and depends strongly on identifying assumptions and internal, external, and construct validity [@EsterlingBradySchwitzgebel:2025].
+
+
+
+
+
+
+## Description
+
+Raj Chetty and gang
+
+
+Description occurs in both approaches and looks at just $X$, just $Y$, and the general relationship between the two
+
+Description forms the foundation of all quantitative policy analysis by examining distributions, patterns, and relationships in data without necessarily making causal claims. 
+
+Univariate description: Examining single variables using summary statistics (central tendency, dispersion), visualizations (histograms, density plots), and data transformations.
+
+Mapping poverty rates across counties, describing trends in healthcare spending over time
+
+Multivariate description: Exploring relationships between variables through correlation analysis, cross-tabulations, and visualization techniques.
+
+Identifying associations between education funding and student outcomes, examining demographic patterns in policy support
+
+
+## Explanation
+
+### General estimation and inference
+
+Stuff on estimation strategies—summary statistics, means, medians, etc.
+
+
+
+confidence intervals, p-values: 
+
+We can use statistics to describe variables and social phenomena, but point estimates (e.g., the average tax revenues received by a city, the average annual unemployment rate in a state, etc.) do not generally provide enough information for making decisions or conclusions about policies. Single values do not indicate how confident we are that the described characteristics reflect reality or how certain we are of those estimates [@AronowMiller:2019, p. 124]. A core element of statistical research, therefore, is inference, which allows us both to (1) quantify uncertainty and (2) test hypotheses about estimates' approximations of real world phenomena. 
+
+regression, t-tests, etc.
+
+### Attribution and causal inference
+
+Overview of Pearl-based DAG language + potential outcomes-based estimands and ATE/ATT
+
+
+
+### Methods for isolating and identifying causal effects
+
+Experiments, quasi-experiments, observational methods with causal identification strategies
+
+- Diff-in-diff: Examining policy changes like unemployment benefit extensions or minimum wage increases
+- Regression discontinuity: Age-based eligibility for certain employment programs
+- Instrumental variables: Weather shocks affecting seasonal employment
+- Synthetic control: State with policy vs states that didn't; create fake state (cite Athey)
+
+
+## Prediction
+
+Out of sample predictions and forecasts
+
+
+
+Chelsea matrix thing?
+
+@KruschkeLiddell:2018
+
+
+
+
+# Applications
+
+
+- Program evaluation - Abadie program evaluation annual review
+- Policy analysis
+
+- Predictions and forecasting
+
+Quantitative analysis used in other types of public policy research, but not necessarily statistical
+
+- Cost-benefit analysis
+- Performance measurement and management
+- Risk assessment and management
+- Real-time policy monitoring (like dashboards)
+- OTHER?
+
+
+# The pitfalls of counting, gathering, and learning from public data
+
+This abundance of high quality data and rigorous descriptive, explanatory, and predictive methods provides policy researchers with ample evidence and tools to test theories, evaluate policies, and refine public and nonprofit programs. However, the collection and analysis of data by governments has also faced significant criticism. @FourcadeHealy:2024 describe the emergence of a three-part "data imperative," where the public and private sectors are both driven by social pressures to *count*, *gather*, and *learn* from data. As noted earlier, governments have long sought to count the social, political, economic, and demographic activities that occur under their purview. Yet, when deciding which phenomena to count and how to count them, government data collection processes can conflict with values like democratic responsiveness, leading to biased and potentially harmful results.
+
+In the late 1800s, as both private firms and government agencies collected more records about customers and citizens, organizations sought to systematize and order this data. Insurance companies, financial firms, real estate lenders, and government benefits agencies used observable individual-level data to organize people into aggregated categories related to health, financial risk, and social status. Specific types of readily measurable individual characteristics—such as income, sex, race, ethnicity, occupation, and education—became standardized and were used both to increase private sector profits and enhance state control by making the population "legible" [@Scott:1998]. Throughout the 1900s, broad social and economic indicators like poverty measures and gross domestic product (GDP) went through a similar process of aggregation and standardization [@Karabell:2014]. The imperative to count continues today, as seen throughout this chapter.
+
+This pursuit of legibility, however, has created a false "impression of precision and order" [@FourcadeHealy:2024, 71], where data-based policies and decision-making can *feel* systematic, scientific, and objective while failing to account for individual heterogeneity. Ordering society into easily observable categories inherently privileges certain types of measurable characteristics by flattening more nuanced details about individuals into homogenous categories. @Scott:1998 argues that this oversimplification of society into quantifiable numbers led to the erasure of local knowledge and the imposition of top-down policies disconnected from local realities, often with disastrous consequences.
+
+One commonly proposed solution for restoring local expertise to data collection has been to democratize the process for deciding what to count and allow for public participation in social scientific work [@Kitcher:2001]. Doing so arguably allows for greater diversity in the values that get embedded in social indicators. For example, inflation in the United States is measured with the Consumer Price Index, which tracks the relative prices of items in a basket of goods that reflect typical household needs. The components of the CPI are countable, legible, and measurable, but they are also laden with values pertinent to specific segments of society—the basket of goods used in the index represents the consumption habits of wealthier households [@Thoma:2024, 7]. Policy makers then use measures like the CPI as objective indicators of economic health and create corresponding policies that privilege those who are reflected in the indicator. @Thoma:2024 argues that aggregate, seemingly-objective indicators like the CPI are anti-democratic. It is possible to democratize the process of creating these indicators—for instance, people from other socioeconomic backgrounds could suggest other unmeasured CPI components that better reflect their lived reality. But even with this kind of citizen input, epistemic inequalities remain—marginal changes to components of an aggregate measure still imply that the concept being counted by the measure is important and valuable. Individuals and social groups who might not benefit from or who disagree with this data collection are left out of the process [@Thoma:2024], and data continues to be counted without them.
+
+Accompanying the imperative to *count* social data is the imperative to *gather* as much data as possible. This injunction to collect data has been driven by multiple factors. First, it is helpful for a state to be able to see across agencies and units (e.g., government benefits offices need income information held by tax agencies), and gathering details about individuals can improve citizen experiences with government services—linking databases across agencies was a key goal of improving digital governance in the 2010s [@Noveck:2015]. Beyond the intentional work of collecting data, some of the rise in data collection has been a factor of sociological isomorphism and the reduced cost of gathering and storing data. Institutions observe how more prominent organizations collect detailed data and do the same, following a mimetic logic of collecting more data "because that's what leaders in our field do—and so they must be good" [@FourcadeHealy:2024, 78]. Moreover, the cost of collecting and storing exceptionally detailed data has decreased substantially over the past decades, and data collection platforms have made it easy for both organizations and individual policy researchers to pick up incidental data about people. For instance, by default, survey platforms include a surprising amount of metadata about respondents including IP addresses, geolocation data, and time spent on the survey. With additional website analytics, it is possible to identify even more identifiable data, such as hardware addresses, the URLs of websites that referred users to the survey, physical home addresses, and other details. Researchers and analysts tend to collect and retain this data "just in case," with the hope that it may someday prove to be useful. Intelligence agencies like the National Security Agency have partnered with private data brokers since 2007 to collect massive amounts of information on US residents [@Savage:2024], most of which reside unused in data warehouses. While these massive repositories of data—often collected mimetically and with no explicit purpose—can be can be stored relatively cheaply, securing them against data breaches and cyberattacks and making them safely accessible to the public poses substantial liability and costs. For instance, in 2020, a large-scale attack in the United States targeted personnel data housed by the Office of Personnel Management, the Pentagon, and the State, Treasury, and Justice Departments [@SangerPerlrothSchmitt:2020]. These threats to government-gathered data underscore the risks of unchecked data accumulation and indicate a need for more deliberate and purpose-driven data collection practices.
+
+The final mandate after the imperatives to count and gather is the imperative to *learn* from the collected data. As we will explore below, there are many good, scientifically sound, and equitable methods for describing, explaining, and predicting social phenomena related to the public sector. At the same time, though, "learning from data at any scale and scope is easy to do badly" [@FourcadeHealy:2024, 88]. As discussed earlier, data counted and gathered by governments does not always reflect population characteristics and inherently encodes epistemic inequalities that favor social majorities [@Thoma:2024]. A rich literature demonstrates that analyses based on this underlying data are also systematically biased against women, racial and ethnic minorities, and disabled communities [@Criado-Perez:2020; @DIgnazioKlein:2020; @Broussard:2023]. These biases often stem from historical underrepresentation in data collection, the use of flawed proxies for complex social phenomena, and the epistemic prioritization of majority perspectives in defining what counts as valid data.
+
+More concerning for policymakers is the fact that policy decisions are often made based on analyses of this biased data without recognition of that bias. Instead, researchers and practitioners often assume that since quantitative policy research is based on hard numbers, it is inherently objective and bias-free [@ONeil:2016]. This is especially common with more advanced black-box predictive modeling systems, which typically lack regulation and scrutiny over the resulting predictions. For instance, during the first few months of the COVID-19 pandemic, algorithms used by state unemployment benefits offices incorrectly categorized thousands of applicants as ineligible for unemployment insurance support because of minor inconsistencies in their data [@Pahlka:2023]. Miscategorization can have more serious legal consequences too. @Eubanks:2019 describes how many state-run child protective services agencies have turned to machine learning-based systems for predicting child abuse, where automated predictions for possible domestic abuses in households trigger automated actions by state agencies and impose automated surveillance and behavioral requirements with strict legal consequences for noncompliance. The algorithm is trained on a subset of the population that had already had experience with these agencies, and as a result, tends to overclassify poorer families. Moreover, the entire process has few humans in the loop to oversee possible errors. 
+
+Similar biased automated policy outcomes abound. Dozens of US cities subscribe to ShotSpotter, a gunfire detection and classification algorithm that attempts to predict and reduce firearm crime. In 2024, several cities cancelled their contacts with the service [@Freskos:2024] following research that demonstrated that ShotSpotter was both (1) ineffective at increasing arrests, reducing crime, or detecting gun violence [@DoucetteGreenNecciDineen:2021], and (2) like many other automated predictive policing technologies, racially biased [@EPIC:2023]. Other  automated systems misidentify Black criminal suspects [@Broussard:2023; @AngwinLarsonMattu:2016], set higher bail amounts for Black defendents [@AngwinLarsonMattu:2016; @KoepkeRobinson:2018], automatically flag trans people at security checkpoints [@Costanza-Chock:2018], prefer white male graduate school applicants [@Burke:2020], offer better loans to white male lenders [@Miller:2020], and are less likely to recommend hiring non-white, male job applicants [@JaserPetrakakiStarr:2022]. Following @Thoma:2024, these methods reflect the epistemic inequality inherent in the underlying data.
+
+Dealing with the bias and incompleteness of these predictive models is made more difficult due to the complexity and opaqueness of their statistical methods. At their core, predictive methods use specialized statistics to recognize patterns and make guesses about future events based on those patterns. These algorithms and models construct their own "sense" of the world—similar to how governments seek to make society "legible" [@Scott:1998]—but lack human context for why specific patterns exist in the first place. Human, street-level bureaucrats can recognize why race, gender, disability, and other personal characteristics might influence someone's interaction with the government and can make personalized accommodations as needed [@AlkhatibBernstein:2019], but algorithms cannot. Predictive models create a sort of "average" flattened utopia based on incomplete training data where the world is legible to algorithms. As a result, people who do not fit the model's sense of the world are flagged as anomalies, judged, and punished [@Alkhatib:2021]. Compounding the issue, because the creators of these systems purposely market their products with ambitious overly promised outcomes—criticized by some as modern "snake oil" [@NarayananKapoor:2024]—many public agencies are lured into using these products, leading to worse outcomes for the public.
+
+TODO something to conclude this section.
+
+# Future directions and conclusion
+
+TODO Something here
+
+
+# References
