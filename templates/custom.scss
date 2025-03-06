@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+/*-- scss:defaults --*/
+
+// USWDS basic color palette, developed by 18$
+// https://designsystem.digital.gov/utilities/color/#basic-palette-2
+$blue:   #0076d6 !default;
+$indigo: #676cc8 !default;
+$purple: #8168b3 !default;
+$pink:   #d72d79 !default;
+$red:    #e52207 !default;
+$orange: #e66f0e !default;
+$yellow: #fee685 !default;
+$green:  #538200 !default;
+$teal:   #04c585 !default;
+$cyan:   #009ec1 !default;
+
+$font-family-sans-serif:      Public Sans, sans-serif !default;
+$font-family-serif:           Public Sans, serif !default;  /* Not actually a serif font but whatever */
+
+/*-- scss:rules --*/
+
+#title-block-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2em;
+    padding-bottom: 2em;
+}
+
+.thanks-section {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}

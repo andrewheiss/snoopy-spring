@@ -1,0 +1,91 @@
+project:
+  type: default
+  output-dir: _output
+  preview: 
+    port: 4444
+
+  render: 
+    - "index.qmd"
+
+language: 
+  title-block-published: Latest version
+  related-formats-title: Other formats
+  other-links-title: Other links
+
+format:
+  wordcount-html: 
+    wordcount-banner: true
+
+    toc: true
+    shift-heading-level-by: 1
+    theme: 
+      - zephyr
+      - templates/custom.scss
+    title-block-banner: "#ffbe2e"
+    include-in-header:
+      - text: |
+          <style type="text/css">
+          h2.hide {
+            display: none;
+          }
+
+          .table ol, .table ul {
+            padding-left: 1em;
+          }
+
+          thead th {
+            text-transform: none;
+          }
+          </style>
+
+    format-links:
+      - html
+      - format: hikmah-pdf
+        text: PDF version
+        icon: file-pdf
+
+    other-links:
+      - text: GitHub repository
+        href: https://github.com/andrewheiss/snoopy-spring/
+        icon: github
+      # - text: SocArXiv preprint
+      #   href: https://doi.org/10.31235/osf.io/9gmhp
+      #   icon: link-45deg
+      # - text: OSF project
+      #   href: https://doi.org/10.17605/OSF.IO/R97Y3
+      #   icon: link-45deg
+
+    knitr:
+      opts_chunk:
+        dev: "ragg_png"
+        dpi: 300
+
+  # Nice PDF output
+  hikmah-pdf:
+    wordcount-banner: false
+
+    output-file: heiss-statistics-public-policy.pdf
+    # Custom fonts
+    mainfont: "Linux Libertine O"
+    mainfontoptions:
+      - "Numbers=Proportional"
+      - "Numbers=OldStyle"
+    sansfont: "Inter"
+    mathfont: "Libertinus Math"
+    # linestretch: 1.05
+
+    knitr:
+      opts_chunk:
+        dev: "cairo_pdf"
+  
+  # Manuscript-y Word
+  docx:
+    wordcount-banner: true
+
+    output-file: heiss-statistics-public-policy.docx
+    reference-doc: templates/reference-styles.docx
+
+    knitr:
+      opts_chunk:
+        dev: "ragg_png"
+        dpi: 300
