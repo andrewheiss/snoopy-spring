@@ -103,7 +103,7 @@ In recent years, though, there has been a small—but growing—backlash against
 Scope: focused primarily on the US
 
 
-Kraft Furlong 115: "Because public problems can be understood only through the insights of many disciplines, policy analysis draws from the ideas and methods of economics, political science, sociology, psychology, philosophy, and other scientific and technical fields."
+Kraft Furlong 115: "Because public problems can be understood only through the insights of many disciplines, policy analysis draws from the ideas and methods of economics, political science, sociology, psychology, philosophy, and other scientific and technical fields." [@KraftFurlong:2015, 115]
 
 # Brief history of statistics in public policy
 
@@ -187,10 +187,17 @@ Types of data: @Pirog:2014
 
 # Core methodological approaches
 
-TODO: Merging of multiple disciplinary traditions: political science/public administration and economics/econometrics
+Quantitative policy analysis and evaluation merges the statistical methods of multiple fields, including political science (e.g., public opinion surveys), psychology (e.g., structural equation modeling and index construction), and economics (e.g., econometric causal identification). Across these disciplines, quantitative researchers focus on both (1) characterizing individual social phenomena and their distributions and (2) analyzing relationships between multiple phenomena. However, this interdisciplinary blend often creates terminological confusion, as different fields use distinct vocabulary for similar estimands, variables, tests, and procedures.
 
+While *terminology* might differ, methodologists have converged on similar categorizations of the *objectives* of quantitative research objectives. @BreunigAhlquist:2014 identify description, inference, and prediction as the primary goals of quantitative public policy research, while @Efron:2020 categorizes statistical work into prediction, estimation, and attribution. Synthesizing these frameworks, I propose three fundamental categories of quantitative public policy methods:
 
-In quantitative statistical analysis, analysts are typically concerned with both (1) the characteristics or distribution of social phenomena on their own and (2) in the relationships between multiple phenomena. Different disciplines and analytical traditions use varying terms to define these variables—@tbl-methods-summary offers some disambiguation for these concepts.
+1. **Description**, where the focus of the analysis is on exploring and understanding key variables, their distributions, and their relationships [@BreunigAhlquist:2014; @Tukey:1977; @Cleveland:1993; @Tufte:2001]
+2. **Explanation**, where the focus of the analysis is on explanatory variables ($X$) to either (1) accurately estimate their relationship with an outcome variable ($Y$), or (2) causally attribute the effect of specific explanatory variables on outcomes [@Shmueli:2010; @Breiman:2001; @Efron:2020; @MorganWinship:2014; @AngristPischke:2008; @PearlMackenzie:2020]
+3. **Prediction**, where the focus of the analysis is on the outcome variable ($Y$) and generating accurate forecasts, classifications, and predictions from new data [@BreunigAhlquist:2014; @Efron:2020]
+
+These three categories provide a useful shorthand for describing different purposes of analysis, but they are rarely mutually exclusive. Descriptive exploratory work is necessary for both explanatory and predictive analysis, and the division between causal and non-causal inference is rarely clear-cut and depends strongly on identifying assumptions and internal, external, and construct validity [@EsterlingBradySchwitzgebel:2025].  Researchers can shift between objectives during different phases of a single study, or may pursue multiple objectives simultaneously. The framework provides a useful organizing structure for understanding methodological approaches without imposing artificial boundaries on analytical practice.
+
+@tbl-methods-summary summarizes these three objectives and provides some interdisciplinary disambiguation for these concepts. The remainder of this section explores each of the three objectives in more depth and highlights their use in policy research.
 
 ```{r}
 #| label: tbl-methods-summary
@@ -224,46 +231,25 @@ read_tsv("data/methods-table.tsv") |>
 ```
 
 
-Methodologists have converged on similar categorizations of quantitative research objectives. @BreunigAhlquist:2014 identify description, inference, and prediction as the primary goals of quantitative public policy research, while @Efron:2020 categorizes statistical work into prediction, estimation, and attribution. Synthesizing these frameworks, I propose three fundamental categories of quantitative public policy methods:
-
-1. **Description**, where the focus of the analysis is on exploring and understanding key variables, their distributions, and their relationships [@BreunigAhlquist:2014; @Tukey:1977; @Cleveland:1993; @Tufte:2001]
-2. **Explanation**, where the focus of the analysis is on explanatory variables ($X$) to either (1) accurately estimate their relationship with an outcome variable ($Y$), or (2) causally attribute the effect of specific explanatory variable on outcomes [@Shmueli:2010; @Breiman:2001; @Efron:2020; @MorganWinship:2014; @AngristPischke:2008; @PearlMackenzie:2020]
-3. **Prediction**, where the focus of the analysis is on the outcome variable ($Y$) and generating accurate forecasts, classifications, and predictions from new data [@BreunigAhlquist:2014; @Efron:2020]
-
-These categories provide a useful shorthand for describing different purposes of analysis, but these approaches are rarely mutually exclusive. Descriptive exploratory work is necessary for both explanatory and predictive analysis, and the division between causal and non-causal inference is rarely clear-cut and depends strongly on identifying assumptions and internal, external, and construct validity [@EsterlingBradySchwitzgebel:2025].
-
-
-
-
-
-
 ## Description
 
-Raj Chetty and gang
+With legal mandates to quantitatively measure the impact of policies and programs, a substantial amount of space in public policy statistics courses and textbooks is dedicated to hypothesis testing and other inferential techniques [@NowlinWehde:2024; @Weber:2024; @Berman:2007; @BuenodeMesquitaFowler:2021]. While these approaches are important, emphasizing inference and prediction prior to understanding the available data can lead to incorrect conclusions. A key component of statistical research that should be carried out before any confirmatory or inferencial data analysis is *exploratory data analysis* (EDA). 
 
+First proposed by @Tukey:1965[@Tukey:1977], EDA is an iterative process where researchers examine their data to discover patterns, identify anomalies, check assumptions, and develop hypotheses. As @Behrens:1997 notes, exploratory techniques help researchers understand the structure of their data before imposing theoretical models. This approach emphasizes the importance of "getting to know" the data before conducting formal statistical tests. Even if "primary research questions are handed to you on a platter" [@WickhamCetinkaya-RundelGrolemund:2023, sec. 10.1] and the scope of an analysis is clear from the outset, exploring the data is still crucial for understanding its quality and discovering any unexpected patterns. Descriptive EDA includes looking at raw data values; computing univariate summary statistics like means, medians, variances, standard deviations, and ranges; computing multivariate summary statistics like correlations and crosstabs; and creating data visualizations like histograms, density plots, scatterplots, bar charts, and maps [@HealyMoody:2014].
 
-Description occurs in both approaches and looks at just $X$, just $Y$, and the general relationship between the two
+In general, descriptive work examines distributions, patterns, and relationships in data without necessarily making causal claims. It can focus on variables by themselves (i.e. just $X$ or just $Y$) or variables in the context of other variables (i.e. the general relationship between $X$ and $Y$) [@Alexander:2023, chapter 11], and it can be done as part of either inferential and predictive analysis, or as an end in and of itself. Basic descriptive statistics are incredibly common—and valuable—in policy research [@Berman:2007, 96]. Policymakers and managers are interested in knowing accurate estimates of all sorts of basic values, like a country's overall average GDP, the median unemployment rate per state, the range of PM2.5 air quality levels over the course of a year in a county, or the variance in property values within a city. For instance, @ChettyHendrenKline:2014 and @ChettyHendrenKline:2014a use detailed administrative data on more than 40 million individuals to describe general patterns of intergenerational mobility. Instead of arguing for a causal identification strategy or employing complex predictive methods, they largely rely on basic regression models, plots, and maps^[See <https://opportunityinsights.org/> to explore interactive versions of their plots and maps.] to illustrate different trends in mobility and inequality throughout the United States. Many large-scale descriptive projects use public data from the US Census, state records, and other sources to provide a descriptive overview of policy trends, like the @AmericanCommunitiesProject:2025, which classifies and maps US counties into a range of different social and economic communities, centers, and enclaves, or the Distressed Communities Index, which maps dozens of different economic indicators across ZIP codes [@EconomicInnovationGroup:2025]. 
 
-Description forms the foundation of all quantitative policy analysis by examining distributions, patterns, and relationships in data without necessarily making causal claims. 
+These kinds of descriptive summary statistics can form the basis for monitoring and process evaluation work [@RossiLipseyHenry:2019] and can inform policy debates and decisionmaking without needing more complex explanatory or predictive approaches. For example, the Congressional Budget Office provides descriptive distributional analyses of the allocation of federal resources across various population crosstabs, like employment rates across race and income levels across family sizes [@CongressionalBudgetOffice:2025]. Similarly, public health agencies provide descriptive data on trends in disease prevalence over time and geography, which empowered policymakers and the general public during the COVID-19 pandemic [@LiYarime:2021].
 
-Univariate description: Examining single variables using summary statistics (central tendency, dispersion), visualizations (histograms, density plots), and data transformations.
-
-Mapping poverty rates across counties, describing trends in healthcare spending over time
-
-Multivariate description: Exploring relationships between variables through correlation analysis, cross-tabulations, and visualization techniques.
-
-Identifying associations between education funding and student outcomes, examining demographic patterns in policy support
-
+Careful exploratory and descriptive analysis serves as both a foundation for more complex analytical methods and a valuable standalone tool for quantitative policy research. By revealing patterns and relationships that might otherwise remain hidden—and by providing researchers with a better understanding of their data—descriptive statistics enable evidence-informed policymaking.
 
 ## Explanation
 
-### General estimation and inference
+### General non-causal estimation and inference
 
-Stuff on estimation strategies—summary statistics, means, medians, etc.
+Stuff on estimation strategies—summary statistics, means, medians, confidence intervals, p-values, etc.
 
-
-
-confidence intervals, p-values: 
+We can calculate means, but we want to test if those means are different from some value blah blah
 
 We can use statistics to describe variables and social phenomena, but point estimates (e.g., the average tax revenues received by a city, the average annual unemployment rate in a state, etc.) do not generally provide enough information for making decisions or conclusions about policies. Single values do not indicate how confident we are that the described characteristics reflect reality or how certain we are of those estimates [@AronowMiller:2019, p. 124]. A core element of statistical research, therefore, is inference, which allows us both to (1) quantify uncertainty and (2) test hypotheses about estimates' approximations of real world phenomena. 
 
