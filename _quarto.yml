@@ -77,11 +77,9 @@ format:
     knitr:
       opts_chunk:
         dev: "cairo_pdf"
-  
+
   # Manuscript-y Word
   docx:
-    wordcount-banner: true
-
     output-file: heiss-statistics-public-policy.docx
     reference-doc: templates/reference-styles.docx
 
