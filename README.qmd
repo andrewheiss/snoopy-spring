@@ -1,5 +1,8 @@
 ---
-format: gfm
+title: "Statistical methods in public policy research"
+format: 
+  gfm: 
+    wrap: preserve
 ---
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
@@ -13,20 +16,28 @@ knitr::opts_chunk$set(
 )
 
 library(emoji)
+
+yaml_metadata <- rmarkdown::yaml_front_matter("index.qmd")
+title <- yaml_metadata$title
+abstract <- yaml_metadata$abstract
 ```
 
-# Quantitative methods in public policy research
-
 [Andrew Heiss](https://www.andrewheiss.com) • Georgia State University
+
+---
 
 <!-- badges: start -->
 <!-- badges: end -->
 
 ---
 
-## Abstract
+> Andrew Heiss, “`{r} title`”
 
+---
 
+## Article summary
+
+`{r} abstract`
 
 
 ### `r emoji_glue(":detective::cherry_blossom:")`: Note on "snoopy spring" project name
@@ -41,7 +52,6 @@ codename_message()
 codename(type = "nicka", seed = "pubpol stats")
 #> [1] "snoopy spring"
 ```
-
 
 ## Licenses
 
