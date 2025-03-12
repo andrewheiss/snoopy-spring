@@ -54,7 +54,7 @@ format:
         href: https://github.com/andrewheiss/snoopy-spring/
         icon: github
       - text: SocArXiv preprint
-        href: https://doi.org/10.31235/osf.io/cwymb
+        href: https://doi.org/10.31235/osf.io/cwymb_v1
         icon: link-45deg
 
     knitr:
