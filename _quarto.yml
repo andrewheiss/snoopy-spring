@@ -17,6 +17,8 @@ format:
     wordcount-banner: false
 
     toc: true
+    toc-expand: 2
+
     shift-heading-level-by: 1
     theme: 
       - zephyr
