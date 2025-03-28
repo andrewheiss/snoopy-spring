@@ -27,7 +27,7 @@ abstract <- yaml_metadata$abstract
 ---
 
 <!-- badges: start -->
-[![HTML preprint](https://img.shields.io/badge/HTML%20preprint-FF851B)](https://stats.andrewheiss.com/snoopy-spring/) [![PDF preprint](https://img.shields.io/badge/PDF%20preprint-3D9970)](https://stats.andrewheiss.com/snoopy-spring/heiss-statistics-public-policy.pdf) [![SocArXiv Preprint](https://img.shields.io/badge/SocArXiv%20preprint-10.31235%2Fosf.io%2Fcwymb_v1-blue)](https://doi.org/10.31235/osf.io/cwymb_v1)
+[![HTML preprint](https://img.shields.io/badge/HTML%20preprint-FF851B)](https://stats.andrewheiss.com/snoopy-spring/) [![PDF preprint](https://img.shields.io/badge/PDF%20preprint-3D9970)](https://stats.andrewheiss.com/snoopy-spring/heiss-statistics-public-policy.pdf) [![SocArXiv Preprint](https://img.shields.io/badge/SocArXiv%20preprint-10.31235%2Fosf.io%2Fcwymb__v1-blue)](https://doi.org/10.31235/osf.io/cwymb_v1)
 <!-- badges: end -->
 
 ---
