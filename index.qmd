@@ -1,7 +1,7 @@
 ---
 title: "Statistical methods in public policy research"
 subtitle: "Chapter for the *Oxford Research Encyclopedia on Public Policy*"
-date: 2025-03-11
+date: 2025-09-23
 author:
 - name: Andrew Heiss
   affiliations: 
@@ -70,9 +70,9 @@ library(tinytable)
 
 minipagify <- function(x) {
   paste0(
-    "\\minipage{\\textwidth}", 
+    "\\minipage[t]{\\textwidth}\\setlist[itemize]{nosep, leftmargin=*}", 
     trimws(markdown::mark_latex(text = x, template = FALSE)), 
-    "\\endminipage"
+    "\\vspace{2pt}\\endminipage"
   )
 }
 
@@ -97,11 +97,6 @@ tt_linebreak <- function(text) {
         str_replace_all("PPPP", "<br>")
     })
   }
-}
-
-if (fmt_out == "latex") {
-  theme_tabularray <- \(x) theme_tt(x, "tabular", style = "tabularray")
-  options(tinytable_tt_theme = theme_tabularray)
 }
 ```
 
@@ -201,8 +196,8 @@ read_tsv("data/methods-table.tsv") |>
     everything(),
     \(x) tt_linebreak(x)
   )) |>
-  tt(width = c(0.2, 0.8 / 3, 0.8 / 3, 0.8 / 3)) |>
-  (\(x)
+  tt(width = c(0.17, 0.83 / 3, 0.83 / 3, 0.83 / 3)) |>
+  (\(x) {
     if (fmt_out == "latex") {
       x |>
         format_tt(i = 3, j = 3, fn = minipagify) |>
@@ -212,12 +207,19 @@ read_tsv("data/methods-table.tsv") |>
     } else {
       x |>
         format_tt(j = 2:4, markdown = TRUE)
-    })() |>
+    }
+  })() |>
   style_tt(align = "l") |>
   style_tt(j = 1, bold = TRUE) |>
-  style_tt(
-    bootstrap_class = "table table-sm",
-    tabularray_inner = "rowsep=2pt, cells={font=\\footnotesize}, row{1}={valign=b}"
+  theme_html(class = "table table-sm") |>
+  theme_latex(
+    inner = paste0(
+      "rowsep=2pt,",
+      "cells={font=\\footnotesize},",
+      "row{1}={valign=b, font=\\footnotesize\\bfseries},",
+      "column{1}={valign=t, font=\\footnotesize\\bfseries},",
+      "hline{3-Y}={0.25pt}"
+    )
   )
 ```
 
