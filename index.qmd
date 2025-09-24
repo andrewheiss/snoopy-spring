@@ -131,49 +131,6 @@ Some of this turn towards quantitative work in academic publishing is a function
 
 The growth of evidence-based quantitative policy analysis culminated in formal codification through the Foundations for Evidence-Based Policymaking Act of 2018, which mandated that federal agencies develop evidence-building plans and systematically evaluate their programs. This legislation represents the full institutionalization of statistical methods in policy analysis, reflecting both the maturation of quantitative methodologies and the belief that "government decisions should be based on rigorous evidence and data about what works" [@EvidenceAct] and that systematic analysis can improve governance outcomes.
 
-```{r}
-#| label: jpam-stuff
-#| eval: false
-
-jpam <- read_csv("data/jpam-articles.csv")
-
-# Early years
-jpam |>
-  filter(
-    Year %in% 1981:1984,
-    !is.na(`Method category`)
-  ) |>
-  group_by(`Method category`) |>
-  summarize(n = n()) |>
-  mutate(total = sum(n), prop = n / total)
-
-# Later years
-jpam |>
-  filter(
-    Year %in% 2000:2016,
-    !is.na(`Method category`)
-  ) |>
-  group_by(`Method category`) |>
-  summarize(n = n()) |>
-  mutate(total = sum(n), prop = n / total)
-
-# Partial plot
-jpam |>
-  filter(
-    Year %in% 1981:1983 | (Year >= 1999 & Year <= 2016),
-    !is.na(`Method category`),
-    `Method category` != "Mixed methods"
-  ) |>
-  group_by(`Method category`, Year) |>
-  summarize(n = n()) |>
-  group_by(Year) |>
-  mutate(total = sum(n), prop = n / total) |>
-  ggplot(
-    aes(x = Year, y = prop, color = `Method category`)
-  ) +
-  geom_line()
-```
-
 
 # Core methodological approaches
 

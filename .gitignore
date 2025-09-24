@@ -11,3 +11,5 @@ _freeze/
 /.luarc.json
 
 _output/
+
+admin/
