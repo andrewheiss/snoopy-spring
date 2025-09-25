@@ -17,7 +17,10 @@ format:
     wordcount-banner: false
 
     toc: true
-    toc-expand: 2
+    toc-expand: 3
+    toc-depth: 4
+
+    number-sections: true
 
     shift-heading-level-by: 1
     theme: 
@@ -66,6 +69,8 @@ format:
   hikmah-pdf:
     wordcount-banner: false
 
+    number-sections: true
+
     output-file: heiss-statistics-public-policy.pdf
     # Custom fonts
     mainfont: "Linux Libertine O"
@@ -84,6 +89,8 @@ format:
   docx:
     output-file: heiss-statistics-public-policy.docx
     reference-doc: templates/reference-styles.docx
+
+    number-sections: true
 
     knitr:
       opts_chunk:
