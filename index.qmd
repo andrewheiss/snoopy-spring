@@ -1,5 +1,5 @@
 ---
-title: "Statistical methods in public policy research"
+title: "Statistical Methods in Public Policy Research"
 subtitle: "Chapter for the *Oxford Research Encyclopedia on Public Policy*"
 date: 2025-09-23
 author:
@@ -113,7 +113,7 @@ Quantitative public policy research is inherently interdisciplinary. As Kraft & 
 This essay provides an overview of statistical methods in public policy, focused primarily on the United States. It begins by tracing the historical development of quantitative approaches in policy research, from early ad hoc applications to the full institutionalization of statistical analysis in federal, state, local, and nonprofit agencies. The analysis then outlines three core methodological approaches to policy-centered statistical research across social science disciplines: description, explanation, and prediction. For each approach, the essay examines key techniques, their applications in policy contexts, and important methodological considerations. The discussion then considers critical perspectives on quantitative policy analysis, particularly concerns about bias, transparency, and the potential reinforcement of existing inequalities through data collection and analysis practices. The conclusion identifies emerging trends and future directions for the field.
 
 
-# Brief history of statistics in public policy
+# Brief History of Statistics in Public Policy
 
 Data has been used to inform government policies for centuries. Governments work to make their societies "legible" and understandable in order to better maintain control over their territories and respond to citizen demands. Technologies like cuneiform tablets documenting economic activity in ancient Sumer, Babylonian and Roman censuses, medieval English customs houses, European military records, and British cadastral maps all served as tools for governments to "see like a state" [@Scott:1998]. Data collection is even built into the United States Constitution, which mandates a decennial census for congressional apportionment (Article I, Section 2).
 
@@ -132,7 +132,7 @@ Some of this turn towards quantitative work in academic publishing is a function
 The growth of evidence-based quantitative policy analysis culminated in formal codification through the Foundations for Evidence-Based Policymaking Act of 2018, which mandated that federal agencies develop evidence-building plans and systematically evaluate their programs. This legislation represents the full institutionalization of statistical methods in policy analysis, reflecting both the maturation of quantitative methodologies and the belief that "government decisions should be based on rigorous evidence and data about what works" [@EvidenceAct] and that systematic analysis can improve governance outcomes.
 
 
-# Core methodological approaches
+# Core Methodological Approaches
 
 Quantitative policy analysis and evaluation merges the statistical methods of multiple fields, including political science, psychology, and economics. Across these disciplines, quantitative researchers focus on both (1) characterizing individual social phenomena and their distributions and (2) analyzing relationships between phenomena. However, this interdisciplinary blend often creates terminological confusion, as different fields use distinct vocabulary for similar estimands, variables, tests, and procedures. While *terminology* might differ, methodologists have converged on similar categorizations of the *objectives* of quantitative research. Synthesizing work by @BreunigAhlquist:2014 and @Efron:2020, quantitative public policy analysis can be divided into three fundamental purposes:
 
@@ -197,7 +197,7 @@ Careful exploratory and descriptive analysis serves as both a foundation for mor
 
 Summary statistics can describe variables and social phenomena, but single point estimates (e.g., the average tax revenues received by a city, the average annual unemployment rate in a state, etc.) do not generally provide enough information for making decisions or conclusions about policies [@Imbens:2021]. Individual values do not indicate confidence that described characteristics reflect reality, nor do they describe how much uncertainty is inherent in those estimates [@AronowMiller:2019, p. 124]. A core element of statistical research, therefore, is *inference*, which allows researchers both to (1) quantify the uncertainty of estimated values and (2) test hypotheses about estimates' approximations of real world phenomena. Inferential approaches move beyond description and *explain* relationships between variables, providing insights into causal mechanisms that drive policy-relevant outcomes. Explanatory analysis primarily focuses on $X$ variables—also known as explanatory or independent variables—and their relationship with an outcome or dependent variable ($Y$). Explanatory analysis moves from characterizing what exists to understanding why it exists and how it might be influenced.
 
-### Estimation, inference, and hypothesis testing
+### Estimation, Inference, and Hypothesis Testing
 
 Explanatory analysis comprises two complementary processes: estimation and hypothesis testing. Estimation involves determining the magnitude of relationships between variables, or how much one or more $X$ variable is associated with or influences $Y$. The process of estimation consists of three components: an estimand, an estimator, and an estimate. Analysts first define an *estimand*, or a target quantity of interest that is based on an underlying theory to be tested [@LundbergJohnsonStewart:2021]. They then apply an *estimator*—a procedure, algorithm, or technique like subtracting two averages or fitting a regression model—to calculate an *estimate* of the target quantity [@LittleLewis:2021]. For example, a researcher might be interested in the relationship of county characteristics ($X$) on unemployment rates ($Y$). Their estimand (or target quantity) might be the difference in average unemployment rates between urban and rural counties. They would then calculate the difference in means as the estimator, resulting in an estimated difference.
 
@@ -209,7 +209,7 @@ Linear regression is particularly ubiquitous in explanation-focused policy analy
 
 Modern statistical software makes it trivial to control for multiple explanatory variables, and it can be tempting to include as many independent variables as possible. However, this is generally a poor approach to explanatory analysis, often called "garbage can" modeling [@Achen:2005]. When explaining variation in a policy outcome, researchers should ensure that the explanatory variables they include are rooted in underlying theory. Moreover, adding extra control variables can lead to unexpected mathematical outcomes due to multicollinearity, confounding, and collider bias, and researchers must take care to not include "bad controls" in their models [@CinelliForneyPearl:2024].
 
-### Causal attribution and causal inference
+### Causal Attribution and Causal Inference
 
 General explanatory analysis allows researchers to estimate the relationships and associations between $X$ and $Y$, but on their own, these techniques cannot speak to whether relationships are mechanistic or causal. If unemployment rates are significantly higher in rural counties than in urban counties, it does not imply that forced urbanization would be a useful policy intervention to improve employment. The old adage that "correlation is not causation" holds.
 
@@ -252,7 +252,7 @@ Unlike explanatory models, where researchers interpret coefficients to understan
 Despite their practical value, predictive techniques are underrepresented in policy analysis research. However, recent methodological innovations have begun to bridge the gap between prediction and explanation. @AtheyImbens:2019 call for increased use of machine learning in econometric and policy research and provide an overview of how these techniques can complement more explanatory work. Ongoing work in sociology and econometrics seeks to combine the predictive power of machine learning while also estimating causal effects and understanding mechanisms [@BrandZhouXie:2023; @WagerAthey:2018; @SemenovaChernozhukov:2021], essentially allowing for $X$-focused work using methods designed for predicting $Y$. 
 
 
-# The pitfalls of counting, gathering, and learning from public data
+# The Pitfalls of Counting, Gathering, and Learning from Public Data
 
 This abundance of high quality data and rigorous descriptive, explanatory, and predictive methods provides policy researchers with ample evidence and tools to test theories, evaluate policies, and refine public and nonprofit programs. However, the collection and analysis of data by governments has also faced significant criticism. @FourcadeHealy:2024 describe the emergence of a three-part "data imperative," where the public and private sectors are both driven by social pressures to *count*, *gather*, and *learn* from data. As noted earlier, governments have long sought to count the social, political, economic, and demographic activities that occur under their purview. Yet, when deciding which phenomena to count and how to count them, government data collection processes can conflict with values like democratic responsiveness, leading to biased and potentially harmful results.
 
@@ -275,7 +275,7 @@ Dealing with the bias and incompleteness of these predictive models is made more
 Statistical methods offer useful tools for understanding social phenomena and evaluating interventions, but these same tools can reinforce existing inequalities when applied uncritically. The imperatives to count, gather, and learn from data have pose challenges for democratic accountability. Policy researchers must rely on ethical frameworks that center human values, recognize the politics of measurement, and remain attentive to voices traditionally marginalized in data collection and analysis [@OECD:2021].
 
 
-# Future directions
+# Future Directions
 
 Statistical work has long been a key component of public policy research, and will continue to play an important role in governance in the future. In conjunction with the modern emphasis on program and policy evaluation, the public sector turned toward digital governance in the 2010s. In 2011, Prime Minister David Cameron established the United Kingdom's Government Digital Service (GDS) unit, charged with "setting, leading and delivering the vision for a modern digital government" [@GovernmentDigitalService:2025]. Many other countries copied this approach by creating similar units and offices, including the United States Digital Service (USDS), established by President Barack Obama in 2014. These special units' missions are designed primarily to modernize outdated government systems and improve constituent experiences with government services—e.g. updating COBOL codebases first written in the 1960s, conducting user experience research on how applicants to benefits programs move through the system, and rapidly fixing the HealthCare.gov website that accompanied the Affordable Care Act [@Pahlka:2023]. As a part of their missions to digitize public sector services, these units also encouraged more modern forms of data analysis and statistical work. In 2015, President Obama appointed the first United States Chief Data Scientist in the Office of Science and Technology Policy, with the mission to "responsibly unleash the power of data to benefit all Americans" [@Honey:2016]. Under this mandate, USDS and OSTP encouraged data sharing across federal, state, and local agencies and supported modern and open analysis pipelines of this data, using both standard statistical techniques and more advanced machine learning approaches to help policymakers make data-driven decisions.
 
