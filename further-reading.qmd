@@ -1,0 +1,69 @@
+---
+title: Further reading
+subtitle: 'Key resources for ["Statistical Methods in Public Policy Research"](/index.html)'
+bibliography: bib/references.json
+csl: bib/apa-cv-alphabetical.csl
+format: 
+  wordcount-html: 
+    include-in-header: 
+      - text: |
+          <style>
+            p.subtitle.lead a {
+                text-decoration: underline !important;
+            }
+          </style>
+    link-citations: false
+    citations-hover: false
+    other-links:
+      - text: Main article
+        href: index.html
+---
+
+# Brief History of Statistics in Public Policy
+
+- @Scott:1998
+- @BreunigAhlquist:2014
+- @NowlinWehde:2024
+
+# Core Methodological Approaches
+
+## Description
+
+- @Healy:2018
+- @HealyMoody:2014
+- @WickhamCetinkaya-RundelGrolemund:2023
+
+## Explanation
+
+### Estimation, Inference, and Hypothesis Testing
+
+- @Imbens:2021
+- @LundbergJohnsonStewart:2021
+- @LittleLewis:2021
+
+### Causal Attribution and Causal Inference
+
+- @PearlMackenzie:2020
+- @GreiferStuart:2023
+- @Huntington-Klein:2021
+- @Rohrer:2018
+- @Cunningham:2021
+- @HernanRobins:2024
+- @AngristPischke:2008
+- @AngristPischke:2015
+
+## Prediction
+
+- @AtheyImbens:2019
+
+# The Pitfalls of Counting, Gathering, and Learning from Public Data
+
+- @FourcadeHealy:2024
+- @Thoma:2024
+- @Broussard:2023
+- @Criado-Perez:2020
+- @DIgnazioKlein:2020
+- @Pahlka:2023
+- @AlkhatibBernstein:2019
+
+# References {.unnumbered}

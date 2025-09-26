@@ -1,7 +1,7 @@
 ---
 title: "Statistical Methods in Public Policy Research"
 subtitle: "Chapter for the *Oxford Research Encyclopedia on Public Policy*"
-date: 2025-09-23
+date: 2025-09-25
 author:
 - name: Andrew Heiss
   affiliations: 
@@ -33,6 +33,14 @@ keywords:
   - estimation
   - causal inference
   - prediction
+
+format: 
+  wordcount-html: 
+    other-links:
+      - text: Further reading
+        href: further-reading.html
+  hikmah-pdf: default
+  docx: default
 
 params:
   wordcount: |
@@ -282,5 +290,8 @@ This emphasis on data science—rather than basic statistics—in public policy 
 
 Statistical work in public policy is not simply a technical exercise—it is fundamentally value-laden and political. As seen throughout this essay, as governments work to "see like a state" the imperatives to count, gather, and learn from data can conflict with democratic values. The choice of what to measure, how to classify observations, which analytical techniques to apply, and how to interpret results all reflect implicit value judgments that shape policy outcomes. Concerns about data and algorithmic bias in criminal justice, healthcare, education, and social services highlight how seemingly objective statistical methods can reproduce and amplify societal inequalities when deployed without critical reflection. Future work in policy-oriented data analysis must merge technical rigor with ethical awareness. The USDS motto to "responsibly unleash the power of data to benefit all" captures this aspiration well. Statistical work should be driven by and accountable to public service values. As statistical methods continue to evolve and public data grows ever more abundant, maintaining this public service orientation is essential to ensure that policy research contributes to more effective, equitable, and democratic governance.
 
+# Further Reading {.unnumbered}
+
+[See here for key readings for each section of this article.](further-reading.html){target="_blank"}
 
 # References {.unnumbered}

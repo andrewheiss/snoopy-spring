@@ -6,6 +6,7 @@ project:
 
   render: 
     - "index.qmd"
+    - "further-reading.qmd"
 
 language: 
   title-block-published: Latest version
